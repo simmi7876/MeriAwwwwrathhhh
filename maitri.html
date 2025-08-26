@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <title>Maitri — Comfort Space 💕</title>
+  <meta name="description" content="A soothing comfort page for Maitri — music, reminders, SOS and quick contact to Simar."/>
+  <style>
+    :root{
+      --lav:#7b2cbf;
+      --rose:#ff4d6d;
+      --bg1:#fff0f6;
+      --bg2:#f3f0ff;
+      --bg3:#e6fbff;
+      --card:#ffffff;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,"Segoe UI","Roboto","Helvetica Neue",Arial;
+      background: linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));
+      color:#222;
+      -webkit-font-smoothing:antialiased;
+      -webkit-text-size-adjust:none;
+    }
+    header{
+      padding:14px;
+      text-align:center;
+      background:rgba(255,255,255,0.85);
+      backdrop-filter: blur(6px);
+      border-bottom-left-radius:18px;
+      border-bottom-right-radius:18px;
+      position:sticky;
+      top:0;
+      z-index:60;
+      box-shadow:0 6px 18px rgba(0,0,0,0.05);
+    }
+    header h1{margin:0;font-size:18px;color:var(--lav)}
+    nav{
+      display:flex;
+      gap:8px;
+      padding:10px;
+      justify-content:center;
+      flex-wrap:wrap;
+      background:transparent;
+    }
+    nav a{
+      text-decoration:none;
+      color:var(--lav);
+      padding:8px 12px;
+      border-radius:999px;
+      background: rgba(255,255,255,0.7);
+      font-weight:700;
+      font-size:13px;
+      box-shadow:0 3px 8px rgba(0,0,0,0.05);
+    }
+    nav a.active{ background: linear-gradient(90deg,var(--lav),var(--rose)); color:white; }
+
+    main{ padding:14px; padding-bottom:90px; }
+    .card{
+      background:var(--card);
+      border-radius:14px;
+      padding:14px;
+      margin:12px 0;
+      box-shadow:0 6px 18px rgba(0,0,0,0.06);
+      max-width:720px;
+      margin-left:auto;margin-right:auto;
+    }
+
+    h2{color:var(--lav);margin:0 0 8px 0;font-size:18px;text-align:center}
+    p,li{font-size:15px;color:#333;line-height:1.5;margin:6px 0}
+    ul{padding-left:16px;margin:8px 0}
+    .bubble{width:140px;height:140px;border-radius:50%;margin:16px auto;background:radial-gradient(circle at 30% 30%, #ffd6e8, #fff4fb 40%, #f0e9ff 74%);box-shadow:0 12px 30px rgba(123,44,191,0.12);animation:spin 18s linear infinite}
+    @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+
+    .hearts{ position:fixed; left:0; top:0; width:100%; height:100%; pointer-events:none; overflow:hidden; z-index:10 }
+    .heart{ position:absolute; color:var(--rose); font-size:20px; opacity:0.85; transform:translateY(0); animation:floatUp linear infinite; filter: drop-shadow(0 6px 8px rgba(0,0,0,0.08)) }
+    @keyframes floatUp{ from{transform:translateY(110vh) scale(.9)} to{transform:translateY(-20vh) scale(1.25); opacity:0} }
+
+    .btn{ display:inline-block; padding:10px 14px; border-radius:12px; background:var(--rose); color:white; font-weight:700; text-decoration:none; border:none; font-size:15px; }
+    .btn.wh{ background:#25D366 }
+    .btn.call{ background:#7b2cbf }
+    .btn.sos{ background:#e53935 }
+
+    .small{ font-size:13px;color:#444; text-align:center; margin-top:8px }
+    .placeholder{ aspect-ratio:4/3; border-radius:12px; background:linear-gradient(135deg,#ffeef8,#f4f0ff); display:grid; place-items:center; color:#9b7bcd; font-weight:700; border:1px dashed rgba(123,44,191,0.12) }
+
+    input,textarea{ width:100%; padding:12px; border-radius:10px; border:1px solid #eee; font-size:15px }
+    textarea{ min-height:90px; resize:vertical }
+
+    .reminders li{ display:flex; gap:10px; align-items:center; justify-content:flex-start; padding:10px; border-radius:12px; background: linear-gradient(90deg,#fff,#fff); box-shadow:0 6px 14px rgba(0,0,0,0.04); }
+
+    .footer-note{ text-align:center; font-size:13px; color:#666; margin-top:8px }
+
+    /* responsive tweaks */
+    @media(min-width:720px){
+      nav{ justify-content: flex-start; padding-left:20px; gap:12px }
+      header h1{ font-size:20px }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🌸 For Maitri — Comfort Space</h1>
+  <nav id="topNav">
+    <a href="#" data-tab="home" class="active">Home</a>
+    <a href="#" data-tab="foods">Foods</a>
+    <a href="#" data-tab="memories">Memories</a>
+    <a href="#" data-tab="poem">Poem</a>
+    <a href="#" data-tab="love">Love</a>
+    <a href="#" data-tab="needs">Needs</a>
+    <a href="#" data-tab="reminders">Reminders</a>
+    <a href="#" data-tab="sos">SOS</a>
+  </nav>
+</header>
+
+<!-- floating hearts layer -->
+<div class="hearts" aria-hidden="true"></div>
+
+<main id="content">
+  <!-- Home -->
+  <section id="home" class="card" role="region" aria-labelledby="homeTitle">
+    <h2 id="homeTitle">Hi Maitri 💕</h2>
+    <p style="text-align:center; max-width:88%; margin:0 auto;">This is your little comfort corner. Breathe. Rest. I'm always here for you.</p>
+    <div class="bubble" aria-hidden="true"></div>
+    <p class="small">Tip: Tap anywhere to enable music if it doesn't start automatically.</p>
+  </section>
+
+  <!-- Foods -->
+  <section id="foods" class="card" hidden>
+    <h2>Foods to Eat 🍎</h2>
+    <ul>
+      <li>🍌 Bananas — potassium for cramps</li>
+      <li>🍊 Oranges / Berries — vitamin C</li>
+      <li>🥬 Leafy greens — iron & magnesium</li>
+      <li>🍫 Dark chocolate — mood booster</li>
+      <li>🍵 Warm ginger / chamomile tea — soothing</li>
+      <li>🥣 Oats / whole grains — steady energy</li>
+    </ul>
+  </section>
+
+  <!-- Memories -->
+  <section id="memories" class="card" hidden>
+    <h2>Our Memories 📸</h2>
+    <div class="grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px">
+      <!-- Replace placeholders with actual files in same folder,
+           Example: <img src="maitri_selfie.jpg" style="width:100%;border-radius:12px" alt="Maitri"> -->
+      <div class="placeholder">Add Image 1</div>
+      <div class="placeholder">Add Image 2</div>
+      <div class="placeholder">Add Image 3</div>
+      <div class="placeholder">Add Video</div>
+    </div>
+    <p class="small">To add real images: copy photos into the same folder and replace the placeholder div with &lt;img src="photo-name.jpg"&gt;</p>
+  </section>
+
+  <!-- Poem -->
+  <section id="poem" class="card" hidden>
+    <h2>A Poem For You 🌸</h2>
+    <!-- Replace this with your full poem text -->
+    <p style="font-style:italic; text-align:center;">
+        meri jaan,meri rooh ka har kinara,
+tu dur hai Andaman mein, main yahan Chennai mein awara.
+Padhai mein hoon, par dil tujhi mein laga rehta hai,
+Har lamha, har pal, tera hi naam kehta hai.
+Kitna pyaar karta hoon tujhe, kaise bataaun,
+Tere bina toh main ek pal bhi jee na paaun.<br>
+
+Tu ek phool si naazuk, ek komal kali,
+Teri khushboo se meri har saans mehki.
+Teri aankhein jaise gehra samandar, saaf aur anmol,
+Tujhe dekh ke lagta hai, tu hai meri har mushkil ka hal.
+Har roop mein tu perfect, har adaa hai nirali,
+Tu meri zindagi ki sabse haseen shayari.<br>
+
+Ek waqt tha jab main akela tha, khooya sa,
+Pyaar kya hota hai, yeh bhi na jaanta tha, roya sa.
+Kisi ne apna nahi samjha, sab ne chhod diya tha,
+Zindagi ne mujhko sirf dard hi diya tha.
+Ek ladka tha main, bina kisi pehchaan ke,
+Bina maksad ke, bas jee raha tha bejaan se.<br>
+
+Meri duniya mein andhera tha gehra,
+Koi roshni nahi thi, koi bhi na tha thehra.
+Par phir tu aayi, ek chamakta sitaara ban ke,
+Mere dil ki har udaasi ko door kiya, ek sahara ban ke.
+Tune sikhaya mujhe pyaar ka matlab kya hai,
+Tune bataya mujhe jeene ka maksad kya hai.<br>
+
+Mujhe tune insaan banaya, ek aadmi bana diya,
+Mere toote hue dil ko phir se jawaan bana diya.
+Meri muskaan  hai tu, meri har khushi ka raaz hai,
+Tu mere dil ki sabse pyari awaaz hai.
+Pehle sab mujhe chhod jaate the, akele kar jaate the,
+Par tu alag hai, tu meri jaan hai, jo dil mein samaate hai.<br>
+
+Jaanta hoon tune bhi dekhe hain bohot toofan,
+Zindagi ne diye hain tujhe bhi bohot gham.
+Teri aankhon mein hai woh gehraai, woh dard chhupa,
+Par ab main hoon na, jo sab dard kar dega dafa.
+Tu phool hai, par kaanton se ghiri rahi hogi,
+Ab main hoon, tera mali, jo har kaanta hata dega, woh jogi.<br>
+
+Meri jaan, ab bas tu sunn le meri baat,
+Tera saath kabhi na chhodunga, din ho ya raat.
+Har mod pe tere saath, har mushkil mein tere kareeb,
+Chahe acche din hon ya bure, main hoon tera naseeb.
+Tujhe hamesha protect karunga, har takleef se,
+Tera haath pakad ke chalunga, har raaste pe, har tareef se.<br>
+
+Tune jo diya hai mujhe, woh main kabhi bhool na paunga,
+Bina kahe tune mujhe kitna kuch diya, main bata na paunga.
+Meri rooh ka har kona, har ehsaas, tera shukr-guzaar hai,
+Teri har baat, har ada, mere dil ka qaraar hai.
+Jo tu chahegi, woh sab kuch laaunga tere liye,
+Apni saari zindagi main kurbaan karunga tere liye.<br>
+
+Tu jaa rahi hai medical college, bohot tough hai course,
+Par ghabrana nahi, main hoon tera support source.
+Din-raat tere saath, teri padhai mein help karunga,
+Har exam mein, har chapter mein, main tera saath dunga.
+Tu meri bachaa hai, meri choti si jaan,
+Tere har sapne ko poora karna, hai mera armaan.<br>
+
+Socha hai humne kitne saare sapne dekhe hain,
+Ek pyara sa ghar, aur usmein nanhe bachche dekhe hain.
+Tere haath mein haath daal ke, baaki zindagi bitaani hai,
+Tere saath hi hasna hai, tere saath hi rooth jaani hai.
+Tere baalon mein safedi, mere chehre pe jhurriyan hongi,
+Par tere liye meri aankhon mein wahi chamak hongi.<br>
+
+Har situation mein, main tera support banke khada rahunga,
+Achche ho ya bure din, main hamesha tere saath rahunga.
+Tu hai meri jaan, mera guroor, mera sab kuch,
+Tere bina main, sach kahoon toh, kuch bhi nahi.
+Tu meri duniya hai, mera aasman, mera zameen,
+Tujhe pyaar karta rahunga, hamesha, har pal, yakeen.<br>
+
+Bas yahi kahunga, ki main tumse bohot pyaar karta hoon,
+Tere bina ek pal bhi jeene se darta hoon.
+Tu meri sab kuch hai, meri perfect dream,
+Hamesha rahenge saath, humari yeh beautiful team.
+Meri jaan, meri zindagi, meri rooh,
+Main tera hoon, sirf tera, hamesha ke liye, I love you.<br>
+    </p>
+  </section>
+
+  <!-- Love -->
+  <section id="love" class="card" hidden>
+    <h2>How Much I Love You ❤️</h2>
+    <p style="text-align:center; max-width:88%; margin:0 auto;">
+        I will never leave you alone never no matter what the situation is whether you are right or wrong I am always with you I dont care if the whole world is against you I will stand against the whole world because you are my world my Mars my Moon my Saturn my Jupiter my star So just understand this you are never alone I dont care if this sounds cringe or if I am being clingy or chep its my duty to assure you and tell you all this when you need to hear it the most for me you are Miss Universe Miss World everything Sydney Sweeney Anne Hathaway maa ki chut insab ki
+I will forever be obsessed with you till my last breath I am grateful that I got you you are the best thing that has ever happened to me the best thing I ever got and I mean that from the bottom of my heart sometimes we all need to hear this from our loved ones no matter the situation we are in you taught me how to become a man you gave me a cause to live you taught me how to express how to love( I love you♥)
+    </p>
+  </section>
+
+  <!-- Needs -->
+  <section id="needs" class="card" hidden>
+    <h2>Tell Me What You Need 💌</h2>
+    <p class="small">Write anything and press "Send" — when online, it opens WhatsApp; when offline, it will open SMS (she needs to press Send).</p>
+    <textarea id="needBox" placeholder="I need..."></textarea>
+    <div style="display:flex;gap:8px;margin-top:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn wh" id="sendBtn">Send (WhatsApp / SMS)</button>
+      <a class="btn call" href="tel:+918527982881">Call Simar</a>
+    </div>
+  </section>
+
+  <!-- Reminders -->
+  <section id="reminders" class="card" hidden>
+    <h2>Reminders For You ⏰</h2>
+    <ul class="reminders">
+      <li>💧 Drink Water</li>
+      <li>🤗 Hug Simmi</li>
+      <li>🥤 Drink ORS</li>
+      <li>🛏️ Take Rest</li>
+      <li>📞 Call Me</li>
+      <li>🍲 Eat Food</li>
+    </ul>
+  </section>
+
+  <!-- SOS -->
+  <section id="sos" class="card" hidden>
+    <h2>🚨 SOS & Location</h2>
+    <p class="small">If there is no internet, pressing SOS will open an SMS to Simar with your current location (you must tap Send). If online, SOS opens WhatsApp with SOS message.</p>
+
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px">
+      <button class="btn sos" id="sosBtn">Send SOS</button>
+      <button class="btn" id="startLive">Start Live Share</button>
+      <button class="btn" id="stopLive" style="display:none;background:#999">Stop Live</button>
+      <a class="btn call" href="tel:+918527982881">Call Simar</a>
+    </div>
+
+    <div style="margin-top:12px;text-align:center">
+      <p id="sosStatus" class="small"></p>
+      <p id="coordsDisplay" class="small" style="word-break:break-all"></p>
+      <div style="margin-top:6px">
+        <button id="shareLocBtn" class="btn" style="display:none">Share Current Location (SMS)</button>
+        <button id="shareLocWhatsBtn" class="btn wh" style="display:none">Share Current Location (WhatsApp)</button>
+      </div>
+    </div>
+
+    <p class="footer-note">Note: For actual continuous live tracking you would need to send coordinates to a server (not done here). This provides safe quick sharing via SMS/WhatsApp.</p>
+  </section>
+
+  <p class="footer-note">Made with care by Simar ❤️</p>
+</main>
+
+<!-- Background audio element -->
+<audio id="bgAudio" loop preload="auto">
+  <source src="https://cdn.pixabay.com/audio/2021/09/01/audio_2f1f3c.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* --------------------------
+   Basic app wiring & UI
+   -------------------------- */
+const numberInternational = "918527982881"; // Simar's number with country code
+const telNumber = "+918527982881";
+
+// simple tab handling
+document.querySelectorAll('#topNav a').forEach(a=>{
+  a.addEventListener('click', (e)=>{
+    e.preventDefault();
+    document.querySelectorAll('#topNav a').forEach(x=>x.classList.remove('active'));
+    a.classList.add('active');
+    const tab = a.dataset.tab;
+    showTab(tab);
+  });
+});
+function showTab(id){
+  document.querySelectorAll('main section').forEach(sec=>sec.hidden = true);
+  const el = document.getElementById(id);
+  if(el) el.hidden = false;
+  // scroll to top for mobile ease
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* floating hearts generator */
+(function createHearts(){
+  const container = document.querySelector('.hearts');
+  for(let i=0;i<12;i++){
+    const el = document.createElement('div');
+    el.className = 'heart';
+    el.textContent = '❤';
+    el.style.left = (Math.random()*100) + 'vw';
+    el.style.animationDuration = (6 + Math.random()*6) + 's';
+    el.style.fontSize = (16 + Math.random()*14) + 'px';
+    el.style.top = (80 + Math.random()*20) + 'vh';
+    el.style.opacity = (0.6 + Math.random()*0.4);
+    container.appendChild(el);
+  }
+})();
+
+/* play audio on first touch (helps with autoplay policies) */
+window.addEventListener('click', function enableAudioOnce(){
+  const audio = document.getElementById('bgAudio');
+  if(audio && audio.paused){
+    audio.volume = 0.35;
+    audio.play().catch(()=>{/* play blocked, require user interaction */});
+  }
+  window.removeEventListener('click', enableAudioOnce);
+});
+
+/* --------------------------
+   Send needs (WhatsApp / SMS fallback)
+   -------------------------- */
+document.getElementById('sendBtn').addEventListener('click', async ()=>{
+  const text = document.getElementById('needBox').value.trim();
+  if(!text){
+    alert("Please write something for Simar 💌");
+    return;
+  }
+
+  if(navigator.onLine){
+    // open WhatsApp with prefilled text
+    const wa = `https://wa.me/${numberInternational}?text=${encodeURIComponent("From Maitri: " + text)}`;
+    window.open(wa, '_blank');
+  } else {
+    // offline -> open SMS app with body
+    const body = encodeURIComponent("From Maitri: " + text);
+    // iOS uses &body, Android works with ?body
+    const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const smsUri = isiOS ? `sms:${telNumber}&body=${body}` : `sms:${telNumber}?body=${body}`;
+    window.location.href = smsUri;
+  }
+  document.getElementById('needBox').value = "";
+});
+
+/* --------------------------
+   SOS Button behavior
+   -------------------------- */
+const sosBtn = document.getElementById('sosBtn');
+const sosStatus = document.getElementById('sosStatus');
+const coordsDisplay = document.getElementById('coordsDisplay');
+const shareLocBtn = document.getElementById('shareLocBtn');
+const shareLocWhatsBtn = document.getElementById('shareLocWhatsBtn');
+
+sosBtn.addEventListener('click', async ()=>{
+  sosStatus.textContent = "";
+  coordsDisplay.textContent = "";
+
+  if(navigator.onLine){
+    sosStatus.textContent = "Online — opening WhatsApp with SOS message...";
+    const wa = `https://wa.me/${numberInternational}?text=${encodeURIComponent("SOS 🚨 I need help! Please come quickly.")}`;
+    window.open(wa, '_blank');
+    return;
+  }
+
+  sosStatus.textContent = "Offline — trying to get location to open SMS...";
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(pos=>{
+      const lat = pos.coords.latitude.toFixed(6);
+      const lon = pos.coords.longitude.toFixed(6);
+      const mapsLink = `https://maps.google.com/?q=${lat},${lon}`;
+      const bodyText = `SOS 🚨 I need help! My location: ${mapsLink}`;
+      const bodyEncoded = encodeURIComponent(bodyText);
+      const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+      const smsUri = isiOS ? `sms:${telNumber}&body=${bodyEncoded}` : `sms:${telNumber}?body=${bodyEncoded}`;
+      coordsDisplay.innerHTML = `Location found: ${lat}, ${lon}`;
+      sosStatus.textContent = "SMS app will open with your location — please tap SEND.";
+      // open SMS app
+      window.location.href = smsUri;
+    }, err=>{
+      // permission denied / error
+      sosStatus.textContent = "Could not get location. Opening SMS app without location.";
+      const body = encodeURIComponent("SOS 🚨 I need help! (location not available)");
+      const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+      const smsUri = isiOS ? `sms:${telNumber}&body=${body}` : `sms:${telNumber}?body=${body}`;
+      window.location.href = smsUri;
+    }, { enableHighAccuracy:true, timeout:8000 });
+  } else {
+    sosStatus.textContent = "Geolocation not supported. Opening SMS app.";
+    const body = encodeURIComponent("SOS 🚨 I need help!");
+    const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const smsUri = isiOS ? `sms:${telNumber}&body=${body}` : `sms:${telNumber}?body=${body}`;
+    window.location.href = smsUri;
+  }
+});
+
+/* --------------------------
+   Live share helper (watchPosition)
+   -------------------------- */
+let watchId = null;
+const startLive = document.getElementById('startLive');
+const stopLive = document.getElementById('stopLive');
+
+startLive.addEventListener('click', ()=>{
+  if(!navigator.geolocation){
+    alert("Geolocation not available on this device.");
+    return;
+  }
+  sosStatus.textContent = "Starting live location updates (only on this screen).";
+  startLive.style.display = 'none';
+  stopLive.style.display = 'inline-block';
+  document.getElementById('shareLocBtn').style.display = 'inline-block';
+  document.getElementById('shareLocWhatsBtn').style.display = 'inline-block';
+
+  watchId = navigator.geolocation.watchPosition(pos=>{
+    const lat = pos.coords.latitude.toFixed(6);
+    const lon = pos.coords.longitude.toFixed(6);
+    coordsDisplay.textContent = `Live: ${lat}, ${lon}`;
+  }, err=>{
+    coordsDisplay.textContent = 'Unable to fetch live location.';
+  }, { enableHighAccuracy:true, maximumAge:3000, timeout:5000 });
+});
+
+stopLive.addEventListener('click', ()=>{
+  if(watchId !== null){
+    navigator.geolocation.clearWatch(watchId);
+    watchId = null;
+  }
+  startLive.style.display = 'inline-block';
+  stopLive.style.display = 'none';
+  sosStatus.textContent = "Live share stopped.";
+  coordsDisplay.textContent = "";
+  document.getElementById('shareLocBtn').style.display = 'none';
+  document.getElementById('shareLocWhatsBtn').style.display = 'none';
+});
+
+/* share current shown location via SMS or WhatsApp buttons */
+shareLocBtn.addEventListener('click', ()=>{
+  const txt = coordsDisplay.textContent;
+  const match = txt.match(/([0-9.-]+),\s*([0-9.-]+)/);
+  if(!match){ alert("No location found. Start Live Share first or allow location."); return; }
+  const lat = match[1], lon = match[2];
+  const maps = `https://maps.google.com/?q=${lat},${lon}`;
+  const body = encodeURIComponent(`My live location: ${maps}`);
+  const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const smsUri = isiOS ? `sms:${telNumber}&body=${body}` : `sms:${telNumber}?body=${body}`;
+  window.location.href = smsUri;
+});
+
+shareLocWhatsBtn.addEventListener('click', ()=>{
+  const txt = coordsDisplay.textContent;
+  const match = txt.match(/([0-9.-]+),\s*([0-9.-]+)/);
+  if(!match){ alert("No location found. Start Live Share first or allow location."); return; }
+  const lat = match[1], lon = match[2];
+  const maps = `https://maps.google.com/?q=${lat},${lon}`;
+  const wa = `https://wa.me/${numberInternational}?text=${encodeURIComponent("My live location: " + maps)}`;
+  window.open(wa, '_blank');
+});
+
+/* --------------------------
+   Basic offline/PWA caching via service worker (single-file registration)
+   We create the SW code as a Blob and register it so no extra file needed.
+   -------------------------- */
+if('serviceWorker' in navigator){
+  const swCode = `
+    const CACHE_NAME = 'maitri-cache-v1';
+    const toCache = ['/', location.pathname, location.href];
+    self.addEventListener('install', function(e){
+      self.skipWaiting();
+      e.waitUntil(
+        caches.open(CACHE_NAME).then(cache => cache.addAll(toCache)).catch(()=>{})
+      );
+    });
+    self.addEventListener('activate', function(e){
+      e.waitUntil(self.clients.claim());
+    });
+    self.addEventListener('fetch', function(e){
+      e.respondWith(
+        caches.match(e.request).then(resp => resp || fetch(e.request).catch(()=>caches.match(location.pathname)))
+      );
+    });
+  `;
+  const blob = new Blob([swCode], {type: 'application/javascript'});
+  const swUrl = URL.createObjectURL(blob);
+  navigator.serviceWorker.register(swUrl).catch(()=>{/* ignore sw register errors */});
+}
+
+/* --------------------------
+   Local offline notification (update UI)
+   -------------------------- */
+function updateOnlineStatus(){
+  const online = navigator.onLine;
+  if(!online){
+    document.title = "Offline — Maitri's Comfort";
+  } else {
+    document.title = "Maitri — Comfort Space";
+  }
+}
+window.addEventListener('online', updateOnlineStatus);
+window.addEventListener('offline', updateOnlineStatus);
+updateOnlineStatus();
+
+/* --------------------------
+   Small safeguard: if opened directly to a section id via link, show correct tab
+   -------------------------- */
+(function openByHash(){
+  const h = location.hash.replace('#','');
+  if(h){
+    const el = document.querySelector(`#topNav a[data-tab="${h}"]`);
+    if(el) el.click();
+  }
+})();
+</script>
+
+</body>
+</html>
